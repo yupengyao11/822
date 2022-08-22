@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+
+        // 生成1-100的新数组
+        // 1
+        // Array.from()方法就是将一个类数组对象或者可遍历对象转换成一个真正的数组。
+        // 详解：“https://www.cnblogs.com/xyf724/p/13825123.html”
+        var arr = Array.from(Array(100), (v, k) => k + 1);
+        console.log(arr)
+        // 2
+        // let arr = []
+        // for (let index = 0; index < 100; index++) {
+        //     arr.push(index + 1)
+        // }
+
+        // 利用reduce 求 1-100的和
+        // console.log(arr)
+        let sum = arr.reduce((pre, next) => {
+            pre += next;
+            return pre;
+        }, 0)
+        console.log(sum);
+
+
+
+        // // 作业2: 笔试原题
+        // function process(url) {
+        //     //.... 使用reduce
+        // }
+        // process(http://www.baidu.com/?name=zhangsan&age=18&sex=nan#) 
+        // // 输出:  { name:"zhangsan",age:18,sex:nan }
+        // match可在字符串内检索指定的值，或找到一个或多个正则表达式的匹配。
+        //语法：string.match(x)
+
+        const process = url => url.match(/([^?=&]+)(=([^&]*))/g).reduce((pre, next) =>
+            (pre[next.slice(0, next.indexOf('='))] = next.slice(next.indexOf('=') + 1), pre)
+            , {});
+
+        process('http://www.baidu.com/?name=zhangsan&age=18&sex=nan')
+
+        console.log(process('http://www.baidu.com/?name=zhangsan&age=18&sex=nan'));
+    </script>
+</body>
+
+</html>
